@@ -6,7 +6,7 @@ class ClassState extends React.Component {
     super(props);
 
     this.state = {
-      error: true,
+      error: false,
       loading: true,
     };
   }
@@ -44,7 +44,7 @@ class ClassState extends React.Component {
         {this.state.loading && <Loading />}
 
         <input placeholder="Codigo de Seguridad" />
-        <button onClick={() => this.setState({ loading: false })}>
+        <button onClick={() => this.setState({ loading: !this.state.loading })}>
           Comprobar
         </button>
       </div>
