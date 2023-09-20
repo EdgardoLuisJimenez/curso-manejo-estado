@@ -92,12 +92,7 @@ function UseState({ name }) {
             onWrite(event.target.value);
           }}
         />
-        <button
-          onClick={() => {
-            onCheck();
-          }}>
-          Comprobar
-        </button>
+        <button onClick={onCheck}>Comprobar</button>
       </div>
     );
   } else if (state.confirmed && !state.deleted) {
@@ -105,18 +100,8 @@ function UseState({ name }) {
       <>
         <p>Pedimos confirmacion. ¿Tas seguro?</p>
 
-        <button
-          onClick={() => {
-            onDelete();
-          }}>
-          Si, eliminar
-        </button>
-        <button
-          onClick={() => {
-            onReset();
-          }}>
-          Nop, me arrepenti
-        </button>
+        <button onClick={onDelete}>Si, eliminar</button>
+        <button onClick={onReset}>Nop, me arrepenti</button>
       </>
     );
   } else {
@@ -124,12 +109,7 @@ function UseState({ name }) {
       <>
         <p>Eliminado con exito</p>
 
-        <button
-          onClick={() => {
-            onReset();
-          }}>
-          Resetear, volver atras
-        </button>
+        <button onClick={onReset}>Resetear, volver atras</button>
       </>
     );
   }
