@@ -5,8 +5,6 @@ const SECURITY_CODE = "paradigma";
 function UseReducer({ name }) {
   const [state, dispatch] = React.useReducer(reducer, initialState);
 
-  console.log(state);
-
   React.useEffect(() => {
     console.log("Empezando el efecto");
 
@@ -16,11 +14,11 @@ function UseReducer({ name }) {
 
         if (state.value === SECURITY_CODE)
           dispatch({
-            type: "CONFIRM",
+            type: actionTypes.CONFIRM,
           });
         else
           dispatch({
-            type: "ERROR",
+            type: actionTypes.ERROR,
           });
 
         console.log("Terminando la validacion");
@@ -45,7 +43,7 @@ function UseReducer({ name }) {
           value={state.value}
           onChange={(event) => {
             dispatch({
-              type: "WRITE",
+              type: actionTypes.WRITE,
               payload: event.target.value,
             });
           }}
@@ -53,7 +51,7 @@ function UseReducer({ name }) {
         <button
           onClick={() => {
             dispatch({
-              type: "CHECK",
+              type: actionTypes.CHECK,
             });
           }}>
           Comprobar
@@ -68,7 +66,7 @@ function UseReducer({ name }) {
         <button
           onClick={() => {
             dispatch({
-              type: "DELETE",
+              type: actionTypes.DELETE,
             });
           }}>
           Si, eliminar
@@ -76,7 +74,7 @@ function UseReducer({ name }) {
         <button
           onClick={() => {
             dispatch({
-              type: "RESET",
+              type: actionTypes.RESET,
             });
           }}>
           Nop, me arrepenti
@@ -91,7 +89,7 @@ function UseReducer({ name }) {
         <button
           onClick={() => {
             dispatch({
-              type: "RESET",
+              type: actionTypes.RESET,
             });
           }}>
           Resetear, volver atras
@@ -102,37 +100,47 @@ function UseReducer({ name }) {
 }
 
 const initialState = {
-  value: "paradigma",
+  value: "",
   error: false,
   loading: false,
   deleted: false,
   confirmed: false,
 };
+
+const actionTypes = {
+  CONFIRM: "CONFIRM",
+  ERROR: "ERROR",
+  WRITE: "WRITE",
+  CHECK: "CHECK",
+  DELETE: "DELETE",
+  RESET: "RESET",
+};
+
 const reducerObject = (state, payload) => ({
-  CONFIRM: {
+  [actionTypes.CONFIRM]: {
     ...state,
     error: false,
     loading: false,
     confirmed: true,
   },
-  ERROR: {
+  [actionTypes.ERROR]: {
     ...state,
     error: true,
     loading: false,
   },
-  WRITE: {
+  [actionTypes.WRITE]: {
     ...state,
     value: payload,
   },
-  CHECK: {
+  [actionTypes.CHECK]: {
     ...state,
     loading: true,
   },
-  DELETE: {
+  [actionTypes.DELETE]: {
     ...state,
     deleted: true,
   },
-  RESET: {
+  [actionTypes.RESET]: {
     ...state,
     confirmed: false,
     deleted: false,
